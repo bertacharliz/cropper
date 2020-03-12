@@ -244,34 +244,33 @@ const cropperData = {
 }
 
 
-    const objectItemsSelector = function () {
+    const objectItemsSelector = function (cropObject, cropperPreviewBox) {
         let selectorButtonList = '';
-        if (cropperData.crop_zones.length >= 1) {
-            cropperData.crop_zones.forEach((cropObject) => {
+
             selectorButtonList += `<button class="SearchWithPhotoCrop__objectSelector" style="left: ${cropObject.selector.left}; top: ${cropObject.selector.top}">
                 <div class="SearchWithPhotoCrop__objectSelectorIcon"></div>
-                <div class="SearchWithPhotoCrop__objectCropPreview" data-crop="${cropObject.crop.left};${cropObject.crop.top};${cropObject.crop.width};${cropObject.crop.height}"></div>
+                <div class="SearchWithPhotoCrop__objectCropPreview" 
+                    style="width: ${cropperPreviewBox.width}; height: ${cropperPreviewBox.height}; left: ${cropperPreviewBox.left}; top: ${cropperPreviewBox.top};" 
+                    data-crop="${cropObject.crop.left};${cropObject.crop.top};${cropObject.crop.width};${cropObject.crop.height}">
+                </div>
             </button>`;
-        });
-    }
 
         const refNode = document.querySelector('.ItemCropper__CropContainer');
         // refNode.after(selectorButtonList);
-
         refNode.insertAdjacentHTML('afterend', selectorButtonList);
     }
 
 
     const getImageDetails = function (imgSize, naturalCropList) {
 
-    const cropperPreviewOutputList = document.querySelectorAll('.SearchWithPhotoCrop__objectCropPreview');
-    for (const index in naturalCropList) {
-        const naturalCrop = naturalCropList[index].crop;
-        const cropperPreviewOutput = cropperPreviewOutputList[index];
-        cropperPreviewOutput.style.width = `${(imgSize.width * naturalCrop.width) / imgSize.naturalWidth}px`;
-        cropperPreviewOutput.style.height = `${(imgSize.height * naturalCrop.height) / imgSize.naturalHeight}px`;
-        cropperPreviewOutput.style.top = '18px';
-        cropperPreviewOutput.style.left = '18px';
+    for (const cropZone of naturalCropList) {
+        const naturalCrop = cropZone.crop;
+        objectItemsSelector(cropZone, {
+            width: `${(imgSize.width * naturalCrop.width) / imgSize.naturalWidth}px`,
+            height:`${(imgSize.height * naturalCrop.height) / imgSize.naturalHeight}px`,
+            top: '18px',
+            left: '18px',
+        });
     }
  }
 
@@ -280,13 +279,10 @@ const image = document.getElementById('CroppedImage');
 
 const cropper = new Cropper(image, {
     aspectRatio: 16 / 9,
-    ready(){
+    crop(){
         const imageData = cropper.getImageData();
         getImageDetails(imageData, cropperData.crop_zones) ;
         console.table(cropper.getImageData());
-    },
-    crop(event) {
-        objectItemsSelector();
     },
 });
 
