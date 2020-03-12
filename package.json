@@ -1,0 +1,23 @@
+{
+  "name": "cropper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cropperManager.js",
+  "dependencies": {
+    "cropperjs": "^1.5.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bertacharliz/cropper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bertacharliz/cropper/issues"
+  },
+  "homepage": "https://github.com/bertacharliz/cropper#readme"
+}
