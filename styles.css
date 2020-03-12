@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background: 0;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+}
+
+.ItemCropper__CropContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.jsCropper {
+    width: 800px;
+}
+.jsCropper__image {
+    display: block;
+    max-width: 100%;
+}
+
+.SearchWithPhotoCrop__objectSelector,
+.SearchWithPhotoCrop__objectCropPreview {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+
+.SearchWithPhotoCrop__objectSelector {
+    padding: 12px;
+}
+
+.SearchWithPhotoCrop__objectSelector:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    opacity: .8;
+}
+
+.SearchWithPhotoCrop__objectSelectorIcon {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.SearchWithPhotoCrop__objectCropPreview {
+    height: 100px;
+    width: 100px;
+    background-color: #fff;
+    border-radius: 10px;
+    display: none;
+    opacity: .2;
+}
